@@ -1,0 +1,17 @@
+am_val_steam_api_form:
+    path:     /
+    defaults: { _controller: AmValSteamAPIBundle:User:form}
+
+am_val_steam_api_profile:
+    path:     /profile
+    defaults: { _controller: AmValSteamAPIBundle:User:profile }
+
+am_val_steam_api_games:
+    path:     /games
+    defaults: { _controller: AmValSteamAPIBundle:User:games }
+
+am_val_steam_api_game_details:
+    path:     /game/{appId}
+    defaults: { _controller: AmValSteamAPIBundle:Game:details }
+    requirements:
+        appId: '\d+'

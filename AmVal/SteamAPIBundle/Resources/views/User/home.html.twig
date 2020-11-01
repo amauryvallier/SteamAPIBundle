@@ -1,0 +1,24 @@
+{% extends 'AmValSteamAPIBundle::base.html.twig' %}
+
+{% block title %}Choose your Steam Profile{% endblock %}
+
+{% block body %}
+
+    <h1>Enter your Steam profile ID</h1>
+
+    <p>Hint : this is the last part of the url of your "Profile" page on Steam</p>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    {% if profiles is not null %}
+    <h2>Already referenced profiles</h2>
+
+    {% for profile in profiles %}
+        <p><a href="#TODO"><img src="{{ profile.avatarURL }}"/>{{ profile.name }}</a><input type="text" value="{{ profile.steamId64 }}"/></p>
+    {% endfor %}
+
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,42 @@
+parameters:
+    am_val_steam_api.steam_api_key: ADA752FBAF6A863DE8A8323EC5CC53A7
+    am_val_steam_api.steam_api_base_url: http://api.steampowered.com
+    am_val_steam_api.steam_static_base_url: http://cdn.akamai.steamstatic.com/steamcommunity/public/images/
+
+services:
+    am_val_steam_api.steam_service:
+        class: AmVal\SteamAPIBundle\Service\SteamService
+        arguments:
+            - "@am_val_steam_api.steam_utility"
+            - "@logger"
+    am_val_steam_api.steam_utility:
+        class: AmVal\SteamAPIBundle\Service\SteamUtility
+        arguments:
+            - "%am_val_steam_api.steam_api_base_url%"
+            - "%am_val_steam_api.steam_api_key%"
+            - "@logger"
+    am_val_steam_api.data_service:
+        class: AmVal\SteamAPIBundle\Service\DataManagementService
+        arguments:
+            - "@doctrine.orm.steam_entity_manager" #TODO : remove by putting everything in DataStorageService
+            - "@am_val_steam_api.steam_service"
+            - "@am_val_steam_api.storage_service"
+            - "@logger"
+    am_val_steam_api.storage_service:
+        class: AmVal\SteamAPIBundle\Service\DataStorageService
+        arguments:
+            - "@doctrine.orm.steam_entity_manager"
+            - "@logger"
+
+    am_val_steam_api.steam_id_listener:
+        class: AmVal\SteamAPIBundle\EventListener\SteamID64Listener
+        arguments:
+            - "@router"
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+    am_val_steam_api.twig.globals_extension:
+        class: AmVal\SteamAPIBundle\Twig\Extension\GlobalsExtension
+        arguments:
+            - '%am_val_steam_api.steam_static_base_url%'
+        tags:
+            - { name: twig.extension }

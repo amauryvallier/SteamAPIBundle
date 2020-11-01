@@ -1,0 +1,25 @@
+{% extends 'AmValSteamAPIBundle::base.html.twig' %}
+
+{% block title %}Steam Game | {{ game.name }}{% endblock %}
+
+{% block body %}
+
+    <h1><img src="{{ steam_api_static_url ~ 'apps/' ~ game.appId ~ '/' ~ game.iconURL ~ '.jpg' }}"/>{{ game.name }} - Details</h1>
+
+    <img src="{{ steam_api_static_url ~ 'apps/' ~ game.appId ~ '/' ~ game.logoURL ~ '.jpg' }}"/>
+
+    <p><strong>Time played : </strong>{{  game.playtime / 60 }}h</p>
+
+    <h2>Global achievements/stats</h2>
+
+    {{ dump(game.achievements) }}
+    {{ dump(game.stats) }}
+    {{ dump(globalAchievementsData) }}
+    {{ dump(globalStatsData) }}
+
+    <h2>User achievements/stats</h2>
+
+    {{ dump(userAchievementsData) }}
+    {{ dump(userStatsData) }}
+
+{% endblock %}

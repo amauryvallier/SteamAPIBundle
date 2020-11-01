@@ -1,0 +1,17 @@
+{% extends 'AmValSteamAPIBundle::base.html.twig' %}
+
+{% block title %}Steam Profile : {{ profile.name }}{% endblock %}
+
+{% block body %}
+
+    <h1>{{ profile.name }} profile on Steam</h1>
+
+    <img src="{{ profile.avatarURL }}" /><br/>
+    <strong>Steam Id : </strong>{{ profile.steamId64 }}<br/>
+    <strong>Profile Id : </strong>{{ profile.profileId }}<br/>
+    <strong>Creation Date : </strong>{{ profile.creationDate|date }}<br/>
+    <a href="{{ profile.profileURL }}" target="blank">See the profile on Steam</a>
+
+    {{ dump(profile) }}
+
+{% endblock %}

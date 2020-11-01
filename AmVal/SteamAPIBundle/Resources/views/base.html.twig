@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>{% block title %}Application SteamAPI{% endblock %}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/amvalsteamapi/css/knacss.css') }}" type="text/css">
+            <link rel="stylesheet" href="{{ asset('bundles/amvalsteamapi/chosen/chosen.css') }}" type="text/css">
+            <link rel="stylesheet" href="{{ asset('bundles/amvalsteamapi/css/style.css') }}" type="text/css">
+        {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('bundles/amvalsteamapi/js/jquery.min.js') }}"></script>
+            <script src="{{ asset('bundles/amvalsteamapi/chosen/chosen.jquery.js') }}"></script>
+            <script src="{{ asset('bundles/amvalsteamapi/js/highcharts/highcharts.js') }}"></script>
+            <script src="{{ asset('bundles/amvalsteamapi/js/highcharts/highcharts-more.js') }}"></script>
+            <script src="{{ asset('bundles/amvalsteamapi/js/highcharts/themes/dark-unica-no-font.js') }}"></script>
+            <script src="{{ asset('bundles/amvalsteamapi/js/highcharts/modules/map.js') }}"></script>
+            <script src="{{ asset('bundles/amvalsteamapi/js/highcharts/mapdata/world.js') }}"></script>
+            <script src="{{ asset('bundles/amvalsteamapi/js/script.js') }}"></script>
+        {% endblock %}
+    </head>
+    <body>
+        {% block header %}
+            <div class="header">
+                <ul class="nav">
+                    <li><a href="{{ path('am_val_steam_api_form') }}">Home</a></li>
+                    {% if app.session.has('steamID64') %}
+                        <li><a href="{{ path('am_val_steam_api_profile') }}">Profile</a></li>
+                        <li>
+                            <a href="{{ path('am_val_steam_api_games') }}">Games</a>
+                            <ul class="subs">
+                                {#<li><a href="{{ path('_scene', {'id': randomScene}) }}">Au hasard</a></li>#}
+                            </ul>
+                        </li>
+                    {% endif %}
+                </ul>
+                <div style="clear:both"></div>
+            </div>
+        {% endblock %}
+        <div class="content grid">
+            {% block body %}{% endblock %}
+        </div>
+    </body>
+</html>

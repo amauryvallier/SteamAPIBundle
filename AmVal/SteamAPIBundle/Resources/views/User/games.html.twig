@@ -1,0 +1,15 @@
+{% extends 'AmValSteamAPIBundle::base.html.twig' %}
+
+{% block title %}Steam Games{% endblock %}
+
+{% block body %}
+
+    <h1>{{ data.game_count }} games on Steam</h1>
+
+    <ul>
+        {% for game in data.games %}
+            <li><a href="{{ path('am_val_steam_api_game_details', {'appId': game.appid}) }}">{{ game.name }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
